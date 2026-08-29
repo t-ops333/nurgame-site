@@ -28,7 +28,6 @@ body {
     padding: 0 20px;
 }
 
-/* Шапка */
 .header {
     position: fixed;
     top: 0;
@@ -93,7 +92,6 @@ body {
     cursor: pointer;
 }
 
-/* Главный экран */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -107,7 +105,7 @@ body {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('img/bg.webp') no-repeat center center;
+    background: url('bg.webp') no-repeat center center;
     background-size: cover;
     animation: slowZoom 20s infinite alternate;
 }
@@ -192,7 +190,6 @@ body {
     animation: bounce 2s infinite;
 }
 
-/* Секции */
 .section {
     padding: 80px 0;
 }
@@ -218,7 +215,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Сетки */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -344,7 +340,6 @@ body {
     color: var(--text-muted);
 }
 
-/* Анимации */
 @keyframes slowZoom {
     from { transform: scale(1); }
     to { transform: scale(1.1); }
@@ -367,7 +362,6 @@ body {
     60% { transform: translateY(-10px); }
 }
 
-/* Появление при скролле */
 [data-aos] {
     opacity: 0;
     transform: translateY(30px);
@@ -379,7 +373,6 @@ body {
     transform: translateY(0);
 }
 
-/* Мобильная адаптация */
 @media (max-width: 768px) {
     .nav {
         display: none;
