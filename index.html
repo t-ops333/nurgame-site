@@ -22,6 +22,9 @@
                 <a href="#commands">Команды</a>
                 <a href="#games">Игры</a>
                 <a href="#vip">VIP и кейсы</a>
+                <a href="#admin-commands">Админ-команды</a>
+                <a href="#hierarchy">Иерархия</a>
+                <a href="#join">Вступить</a>
                 <a href="#rules">Правила</a>
                 <a href="#legal">Правовая информация</a>
                 <a href="#contact">Контакты</a>
@@ -45,8 +48,8 @@
             <img src="logo.png" alt="NurGame" class="hero-logo">
             <h1 class="hero-title">Nur<span class="accent">Game</span></h1>
             <p class="hero-subtitle">Игровой бот с виртуальной валютой, майнингом и кланами</p>
-            <a href="https://t.me/KaspiRedCreditBot" class="btn btn-primary">
-                <i class="fab fa-telegram-plane"></i> Играть в Telegram
+            <a href="#commands" class="btn btn-primary">
+                <i class="fas fa-list"></i> Смотреть команды
             </a>
             <div class="scroll-down">
                 <i class="fas fa-chevron-down"></i>
@@ -183,8 +186,98 @@
         </div>
     </section>
 
+    <!-- Админ-команды -->
+    <section class="section" id="admin-commands">
+        <div class="container">
+            <h2 class="section-title" data-aos>Админ-команды</h2>
+            <div class="admin-grid">
+                <div class="admin-block" data-aos>
+                    <h3>🛡 Модератор</h3>
+                    <ul>
+                        <li><span class="command">/info @user</span> — инфо о пользователе</li>
+                        <li><span class="command">/stats</span> — статистика бота</li>
+                        <li><span class="command">/list_admins</span> — список админов</li>
+                    </ul>
+                </div>
+                <div class="admin-block" data-aos>
+                    <h3>🔰 Админ</h3>
+                    <ul>
+                        <li><span class="command">выдать @user сумма</span> — начислить</li>
+                        <li><span class="command">/take @user сумма</span> — списать</li>
+                        <li><span class="command">/freeze @user</span> — заморозить (обычных)</li>
+                        <li><span class="command">/unfreeze @user</span> — разморозить</li>
+                        <li><span class="command">/addpromo</span>, <span class="command">/delpromo</span></li>
+                    </ul>
+                </div>
+                <div class="admin-block" data-aos>
+                    <h3>👑 Главный админ</h3>
+                    <ul>
+                        <li><span class="command">/add_admin @user ранг</span></li>
+                        <li><span class="command">/remove_admin @user</span></li>
+                        <li><span class="command">/broadcast текст</span></li>
+                        <li><span class="command">/snos @user</span> — снять с должности</li>
+                        <li><span class="command">/setbonus</span>, <span class="command">/setcooldown</span></li>
+                    </ul>
+                </div>
+                <div class="admin-block" data-aos>
+                    <h3>💎 Владелец</h3>
+                    <ul>
+                        <li><span class="command">/sql_execute</span></li>
+                        <li><span class="command">/backup</span></li>
+                        <li><span class="command">/deleteuser @user</span></li>
+                        <li><span class="command">/givepower @user cmd</span></li>
+                        <li>И все секретные команды</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Иерархия админов -->
+    <section class="section section-alt" id="hierarchy">
+        <div class="container">
+            <h2 class="section-title" data-aos>Иерархия админов</h2>
+            <div class="hierarchy-list">
+                <div class="hierarchy-item" data-aos>
+                    <span class="rank">💎 Владелец</span>
+                    <span class="rank-desc">Полный доступ ко всем командам и настройкам</span>
+                </div>
+                <div class="hierarchy-item" data-aos>
+                    <span class="rank">👑 Главный админ</span>
+                    <span class="rank-desc">Управление админами, рассылка, настройки бонусов</span>
+                </div>
+                <div class="hierarchy-item" data-aos>
+                    <span class="rank">🔰 Админ</span>
+                    <span class="rank-desc">Выдача/списание баланса, заморозка обычных игроков</span>
+                </div>
+                <div class="hierarchy-item" data-aos>
+                    <span class="rank">👑 Special Admin</span>
+                    <span class="rank-desc">Назначение модераторов, контроль за админами</span>
+                </div>
+                <div class="hierarchy-item" data-aos>
+                    <span class="rank">⭐ Модератор</span>
+                    <span class="rank-desc">Просмотр инфо, статистики, списка админов</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как вступить в команду -->
+    <section class="section" id="join">
+        <div class="container">
+            <h2 class="section-title" data-aos>Как вступить в команду?</h2>
+            <div class="join-box" data-aos>
+                <p>Хочешь стать частью команды NurGame? Пиши владельцу в личные сообщения.</p>
+                <p>Расскажи о себе, своём опыте и почему хочешь помогать проекту.</p>
+                <a href="https://t.me/se7ze" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Написать владельцу
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Правила -->
-    <section class="section" id="rules">
+    <section class="section section-alt" id="rules">
         <div class="container">
             <h2 class="section-title" data-aos>Правила и дисклеймер</h2>
             <div class="rules-box" data-aos>
@@ -197,7 +290,7 @@
     </section>
 
     <!-- Правовая информация -->
-    <section class="section section-alt" id="legal">
+    <section class="section" id="legal">
         <div class="container">
             <h2 class="section-title" data-aos>Правовая информация</h2>
             <div class="rules-box" data-aos>
@@ -216,7 +309,7 @@
     </section>
 
     <!-- Контакты -->
-    <section class="section" id="contact">
+    <section class="section section-alt" id="contact">
         <div class="container">
             <h2 class="section-title" data-aos>Контакты</h2>
             <div class="contact-buttons">
