@@ -6,7 +6,6 @@ burger.addEventListener('click', () => {
     nav.classList.toggle('active');
 });
 
-// Закрывать меню при клике на ссылку
 nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         nav.classList.remove('active');
