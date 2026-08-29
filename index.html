@@ -230,43 +230,71 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Табы */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            border-radius: 30px;
+        /* Аккордеон */
+        .accordion-item {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            color: var(--text-muted);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 15px 20px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text);
+            background: var(--bg-card);
+            transition: background 0.3s;
         }
 
-        .tab-btn.active,
-        .tab-btn:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
+        .accordion-header:hover {
+            background: var(--bg-hover);
         }
 
-        .tab-content {
-            display: none;
+        .accordion-header .icon {
+            transition: transform 0.3s;
         }
 
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
+        .accordion-item.active .accordion-header .icon {
+            transform: rotate(180deg);
         }
 
-        /* Карточки */
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: #111118;
+        }
+
+        .accordion-body-inner {
+            padding: 15px 20px;
+        }
+
+        .command-list {
+            list-style: none;
+        }
+
+        .command-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .command-list li:last-child {
+            border-bottom: none;
+        }
+
+        .command-list .cmd {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Карточки игр */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -292,51 +320,8 @@
             color: var(--accent);
         }
 
-        .card p,
-        .card li {
+        .card p {
             color: var(--text-muted);
-        }
-
-        .card ul {
-            list-style: none;
-        }
-
-        .card li {
-            padding: 6px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Аккордеон */
-        .accordion-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 10px;
-        }
-
-        .accordion-header {
-            padding: 15px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .accordion-body {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .accordion-body p {
-            padding-bottom: 15px;
-            color: var(--text-muted);
-        }
-
-        .accordion-item.active .accordion-body {
-            max-height: 300px;
         }
 
         /* Иерархия */
@@ -384,7 +369,6 @@
             color: var(--text-muted);
         }
 
-        /* Анимации */
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -396,33 +380,13 @@
             to { text-shadow: 0 0 30px rgba(168,85,247,1); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Мобильная адаптация */
         @media (max-width: 768px) {
-            .nav-desktop {
-                display: none;
-            }
-            .burger {
-                display: block;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .section-title {
-                font-size: 2rem;
-            }
-            .hierarchy-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 5px;
-            }
-            .hierarchy-item .desc {
-                text-align: center;
-            }
+            .nav-desktop { display: none; }
+            .burger { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .hierarchy-item { flex-direction: column; text-align: center; gap: 5px; }
+            .hierarchy-item .desc { text-align: center; }
         }
     </style>
 </head>
@@ -442,7 +406,6 @@
             </nav>
             <button class="burger" id="burger"><i class="fas fa-bars"></i></button>
         </div>
-        <!-- Мобильное меню -->
         <div class="mobile-nav" id="mobileNav">
             <a href="#games">Игры</a>
             <a href="#commands">Команды</a>
@@ -509,52 +472,117 @@
     <section id="commands" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Основные команды</h2>
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="economy">Экономика</button>
-                <button class="tab-btn" data-tab="mining">Майнинг</button>
-                <button class="tab-btn" data-tab="clans">Кланы</button>
-                <button class="tab-btn" data-tab="misc">Прочее</button>
-            </div>
-
-            <div id="economy" class="tab-content active">
-                <div class="cards-grid">
-                    <div class="card"><h3>💰 Баланс</h3><p><span style="color:#a855f7;">баланс</span> — показывает твой баланс и статистику.</p></div>
-                    <div class="card"><h3>🎁 Бонус</h3><p><span style="color:#a855f7;">бонус</span> — ежедневный бонус (раз в 8 часов).</p></div>
-                    <div class="card"><h3>💸 Перевод</h3><p><span style="color:#a855f7;">п [сумма] @user</span> — перевести деньги.</p></div>
-                    <div class="card"><h3>🏦 Депозит</h3><p><span style="color:#a855f7;">депозит [сумма]</span> — открыть вклад. <span style="color:#a855f7;">снять депозит</span> — забрать.</p></div>
-                    <div class="card"><h3>👛 Сейф</h3><p><span style="color:#a855f7;">сейф</span> — твои кейсы и BTC.</p></div>
-                    <div class="card"><h3>👥 Рефералы</h3><p><span style="color:#a855f7;">/referral</span> — приглашай друзей, получай бонусы.</p></div>
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <div class="accordion-header">
+                        Экономика <i class="fas fa-chevron-down icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-inner">
+                            <ul class="command-list">
+                                <li><span class="cmd">баланс</span> — показать баланс и статистику</li>
+                                <li><span class="cmd">бонус</span> — ежедневный бонус</li>
+                                <li><span class="cmd">п [сумма] @user</span> — перевести деньги</li>
+                                <li><span class="cmd">депозит [сумма]</span> — открыть вклад</li>
+                                <li><span class="cmd">снять депозит</span> — забрать вклад</li>
+                                <li><span class="cmd">сейф</span> — просмотр кейсов и BTC</li>
+                                <li><span class="cmd">/referral</span> — реферальная ссылка</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div id="mining" class="tab-content">
-                <div class="cards-grid">
-                    <div class="card"><h3>⛏ Майнинг</h3><p><span style="color:#a855f7;">майнинг</span> — посмотреть ферму.</p></div>
-                    <div class="card"><h3>🛒 Магазин</h3><p><span style="color:#a855f7;">майнинг магазин</span> — список видеокарт и цен.</p></div>
-                    <div class="card"><h3>🖥 Купить карту</h3><p><span style="color:#a855f7;">майнинг купить [тип] [кол-во]</span> — лимит 10 карт.</p></div>
-                    <div class="card"><h3>📤 Забрать BTC</h3><p><span style="color:#a855f7;">забрать</span> — получить накопленный BTC.</p></div>
-                    <div class="card"><h3>💱 Продать BTC</h3><p><span style="color:#a855f7;">продать [кол-во]</span> или <span style="color:#a855f7;">продать всё</span>.</p></div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Майнинг <i class="fas fa-chevron-down icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-inner">
+                            <ul class="command-list">
+                                <li><span class="cmd">майнинг</span> — посмотреть ферму</li>
+                                <li><span class="cmd">майнинг магазин</span> — список видеокарт</li>
+                                <li><span class="cmd">майнинг купить [тип] [кол-во]</span> — купить карту (лимит 10)</li>
+                                <li><span class="cmd">забрать</span> — забрать накопленный BTC</li>
+                                <li><span class="cmd">продать [кол-во]</span> — продать BTC</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div id="clans" class="tab-content">
-                <div class="cards-grid">
-                    <div class="card"><h3>🏰 Создать клан</h3><p><span style="color:#a855f7;">clan создать [имя]</span> — 100 млн.</p></div>
-                    <div class="card"><h3>🚪 Вступить</h3><p><span style="color:#a855f7;">clan вступить [имя/id]</span></p></div>
-                    <div class="card"><h3>ℹ️ Инфо</h3><p><span style="color:#a855f7;">clan инфо</span></p></div>
-                    <div class="card"><h3>💰 Казна</h3><p><span style="color:#a855f7;">clan казна [сумма]</span> — пополнить.</p></div>
-                    <div class="card"><h3>💸 Снять</h3><p><span style="color:#a855f7;">clan снять [сумма]</span> — только владелец.</p></div>
-                    <div class="card"><h3>🏆 Топ кланов</h3><p><span style="color:#a855f7;">clan топ</span></p></div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Кланы <i class="fas fa-chevron-down icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-inner">
+                            <ul class="command-list">
+                                <li><span class="cmd">clan создать [имя]</span> — создать клан (100 млн)</li>
+                                <li><span class="cmd">clan вступить [имя/id]</span> — вступить в клан</li>
+                                <li><span class="cmd">clan выйти</span> — выйти из клана</li>
+                                <li><span class="cmd">clan инфо</span> — информация о клане</li>
+                                <li><span class="cmd">clan казна [сумма]</span> — пополнить казну</li>
+                                <li><span class="cmd">clan снять [сумма]</span> — снять из казны (владелец)</li>
+                                <li><span class="cmd">clan топ</span> — топ кланов</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div id="misc" class="tab-content">
-                <div class="cards-grid">
-                    <div class="card"><h3>👤 Профиль</h3><p><span style="color:#a855f7;">б</span> или <span style="color:#a855f7;">баланс</span></p></div>
-                    <div class="card"><h3>🏷️ Смена ника</h3><p><span style="color:#a855f7;">/name [новое имя]</span></p></div>
-                    <div class="card"><h3>👑 VIP</h3><p><span style="color:#a855f7;">/vip</span> — инфо о VIP. <span style="color:#a855f7;">vip_buy [часы]</span> — покупка.</p></div>
-                    <div class="card"><h3>📋 Ежедневное</h3><p><span style="color:#a855f7;">/daily</span> — задание с наградой.</p></div>
-                    <div class="card"><h3>🎟 Промокод</h3><p><span style="color:#a855f7;">/promo [код]</span></p></div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Прочее <i class="fas fa-chevron-down icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-inner">
+                            <ul class="command-list">
+                                <li><span class="cmd">/start</span> — начать работу</li>
+                                <li><span class="cmd">/name [новое имя]</span> — сменить ник</li>
+                                <li><span class="cmd">/vip</span> — VIP-статус</li>
+                                <li><span class="cmd">vip_buy [часы]</span> — купить VIP</li>
+                                <li><span class="cmd">/daily</span> — ежедневное задание</li>
+                                <li><span class="cmd">/promo [код]</span> — промокод</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Секретные команды владельца <i class="fas fa-chevron-down icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-inner">
+                            <ul class="command-list">
+                                <li><span class="cmd">/zero @user</span> — обнулить баланс</li>
+                                <li><span class="cmd">/double @user</span> — удвоить баланс</li>
+                                <li><span class="cmd">/randomize @user мин макс</span> — случайный баланс</li>
+                                <li><span class="cmd">/transfer сумма @user</span> — перевести деньги</li>
+                                <li><span class="cmd">/nick @user новое_имя</span> — сменить ник игроку</li>
+                                <li><span class="cmd">/curse @user</span> — наложить проклятие</li>
+                                <li><span class="cmd">/bless @user</span> — снять проклятие</li>
+                                <li><span class="cmd">/lottery сумма</span> — провести лотерею</li>
+                                <li><span class="cmd">/reset @user</span> — полностью сбросить игрока</li>
+                                <li><span class="cmd">/ban @user</span> — заблокировать</li>
+                                <li><span class="cmd">/unban @user</span> — разблокировать</li>
+                                <li><span class="cmd">/setname @user имя</span> — сменить имя</li>
+                                <li><span class="cmd">/history @user</span> — история ставок</li>
+                                <li><span class="cmd">/globalbonus сумма</span> — начислить всем</li>
+                                <li><span class="cmd">/setallbal сумма</span> — установить баланс всем</li>
+                                <li><span class="cmd">/resetallbal</span> — сбросить балансы всем</li>
+                                <li><span class="cmd">/clearlog</span> — очистить лог</li>
+                                <li><span class="cmd">/wipe</span> — очистить ставки</li>
+                                <li><span class="cmd">/checkpoint @user</span> — сохранить чекпоинт</li>
+                                <li><span class="cmd">/restore_checkpoint @user</span> — восстановить чекпоинт</li>
+                                <li><span class="cmd">/adminlog</span> — лог админов</li>
+                                <li><span class="cmd">/sql_execute</span> — выполнить SQL</li>
+                                <li><span class="cmd">/emergency_stop</span> — остановить бота</li>
+                                <li><span class="cmd">/backup</span> — скачать базу</li>
+                                <li><span class="cmd">/givepower @user cmd</span> — выдать секретную команду</li>
+                                <li><span class="cmd">/takepower @user cmd</span> — забрать секретную команду</li>
+                                <li><span class="cmd">/deleteuser @user</span> — удалить пользователя</li>
+                                <li><span class="cmd">/setadminrank @user ранг</span> — изменить ранг</li>
+                                <li><span class="cmd">/snos @user</span> — снести с должности</li>
+                                <li><span class="cmd">/unsnos @user</span> — восстановить после сноса</li>
+                                <li><span class="cmd">/clearminers @user</span> — сбросить видеокарты</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -630,16 +658,16 @@
             <h2 class="section-title">Частые вопросы</h2>
             <div class="accordion">
                 <div class="accordion-item active">
-                    <div class="accordion-header">Как начать играть? <i class="fas fa-chevron-down"></i></div>
-                    <div class="accordion-body"><p>Нажми /start в боте, получи стартовый баланс и выбери игру через меню или команды.</p></div>
+                    <div class="accordion-header">Как начать играть? <i class="fas fa-chevron-down icon"></i></div>
+                    <div class="accordion-body"><div class="accordion-body-inner"><p>Нажми /start в боте, получи стартовый баланс и выбери игру через меню или команды.</p></div></div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">Это казино? <i class="fas fa-chevron-down"></i></div>
-                    <div class="accordion-body"><p>Нет, это развлекательный бот. Валюта виртуальная и не обменивается на реальные деньги.</p></div>
+                    <div class="accordion-header">Это казино? <i class="fas fa-chevron-down icon"></i></div>
+                    <div class="accordion-body"><div class="accordion-body-inner"><p>Нет, это развлекательный бот. Валюта виртуальная и не обменивается на реальные деньги.</p></div></div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">Как вступить в команду? <i class="fas fa-chevron-down"></i></div>
-                    <div class="accordion-body"><p>Напиши владельцу в Telegram: @se7ze</p></div>
+                    <div class="accordion-header">Как вступить в команду? <i class="fas fa-chevron-down icon"></i></div>
+                    <div class="accordion-body"><div class="accordion-body-inner"><p>Напиши владельцу в Telegram: @se7ze</p></div></div>
                 </div>
             </div>
         </div>
@@ -671,31 +699,16 @@
         burger.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
         });
-        // Закрывать мобильное меню при клике на ссылку
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileNav.classList.remove('active');
             });
         });
 
-        // Табы
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabId = btn.dataset.tab;
-                // Убираем active у всех кнопок и контента
-                tabBtns.forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                // Активируем нужный контент
-                btn.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
         // Аккордеон
-        const accordionItems = document.querySelectorAll('.accordion-item');
-        accordionItems.forEach(item => {
-            item.querySelector('.accordion-header').addEventListener('click', () => {
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
                 item.classList.toggle('active');
             });
         });
