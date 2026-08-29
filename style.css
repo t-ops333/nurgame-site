@@ -105,7 +105,7 @@ body {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('bg.jpg') no-repeat center center;
+    background: url('bg.webp') no-repeat center center;
     background-size: cover;
     animation: slowZoom 20s infinite alternate;
 }
@@ -145,7 +145,8 @@ body {
 
 .hero-subtitle {
     font-size: 1.2rem;
-    color: var(--text-muted);
+    color: #cccccc;          /* было #aaa, стало чуть светлее, но не белое */
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
     max-width: 500px;
 }
 
@@ -317,6 +318,83 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.admin-block {
+    background: var(--bg-alt);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.admin-block h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--accent);
+}
+
+.admin-block ul {
+    list-style: none;
+}
+
+.admin-block li {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+}
+
+.command {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.hierarchy-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hierarchy-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-alt);
+    padding: 15px 20px;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent);
+}
+
+.rank {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.rank-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.join-box {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--bg-alt);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+}
+
+.join-box p {
+    margin-bottom: 15px;
+    color: var(--text-muted);
+}
+
 .rules-box {
     max-width: 700px;
     margin: 0 auto;
@@ -411,7 +489,8 @@ body {
         font-size: 2rem;
     }
 
-    .command-item {
+    .command-item,
+    .hierarchy-item {
         flex-direction: column;
         text-align: center;
         gap: 5px;
