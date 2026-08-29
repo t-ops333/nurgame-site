@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NurGame — Игровой бот</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#hero" class="logo">
+                <img src="img/logo.png" alt="NurGame" class="logo-img">
+            </a>
+            <nav class="nav" id="nav">
+                <a href="#about">О боте</a>
+                <a href="#commands">Команды</a>
+                <a href="#games">Игры</a>
+                <a href="#vip">VIP и кейсы</a>
+                <a href="#rules">Правила</a>
+                <a href="#legal">Правовая информация</a>
+                <a href="#contact">Контакты</a>
+            </nav>
+            <div class="socials-top">
+                <a href="https://t.me/KaspiRedCreditBot" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://t.me/kaspired_game" target="_blank"><i class="fas fa-bullhorn"></i></a>
+                <a href="https://t.me/kaspired_chat" target="_blank"><i class="fas fa-users"></i></a>
+                <a href="https://t.me/se7ze" target="_blank"><i class="fas fa-user"></i></a>
+            </div>
+            <button class="burger" id="burger" aria-label="Меню">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <img src="img/logo.png" alt="NurGame" class="hero-logo">
+            <h1 class="hero-title">Nur<span class="accent">Game</span></h1>
+            <p class="hero-subtitle">Игровой бот с виртуальной валютой, майнингом и кланами</p>
+            <a href="https://t.me/KaspiRedCreditBot" class="btn btn-primary">
+                <i class="fab fa-telegram-plane"></i> Играть в Telegram
+            </a>
+            <div class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- О боте -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos>О боте</h2>
+            <p class="section-text" data-aos>
+                NurGame — это развлекательная платформа внутри Telegram. Играйте в рулетку, открывайте кейсы, майните крипту и соревнуйтесь с друзьями. Вся валюта виртуальная и не имеет реальной ценности.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card" data-aos>
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Много игр</h3>
+                    <p>Рулетка, джокер, мины, дуэли, coinflip, фортуна</p>
+                </div>
+                <div class="feature-card" data-aos>
+                    <i class="fas fa-coins"></i>
+                    <h3>Экономика</h3>
+                    <p>Виртуальная валюта, кейсы, VIP, депозиты</p>
+                </div>
+                <div class="feature-card" data-aos>
+                    <i class="fas fa-users"></i>
+                    <h3>Кланы</h3>
+                    <p>Создавайте кланы, пополняйте казну, соревнуйтесь</p>
+                </div>
+                <div class="feature-card" data-aos>
+                    <i class="fas fa-microchip"></i>
+                    <h3>Майнинг</h3>
+                    <p>Покупайте видеокарты и добывайте BTC (игровой)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Команды -->
+    <section class="section section-alt" id="commands">
+        <div class="container">
+            <h2 class="section-title" data-aos>Основные команды</h2>
+            <div class="commands-list">
+                <div class="command-item" data-aos>
+                    <span class="command">/start</span>
+                    <span class="description">Начать работу с ботом</span>
+                </div>
+                <div class="command-item" data-aos>
+                    <span class="command">баланс</span>
+                    <span class="description">Посмотреть свой профиль и баланс</span>
+                </div>
+                <div class="command-item" data-aos>
+                    <span class="command">кейс</span>
+                    <span class="description">Список кейсов и покупка</span>
+                </div>
+                <div class="command-item" data-aos>
+                    <span class="command">майнинг</span>
+                    <span class="description">Управление майнинг фермой</span>
+                </div>
+                <div class="command-item" data-aos>
+                    <span class="command">clan</span>
+                    <span class="description">Кланы: создание, вступление, казна</span>
+                </div>
+                <div class="command-item" data-aos>
+                    <span class="command">джокер [ставка]</span>
+                    <span class="description">Игра Джокер</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Игры -->
+    <section class="section" id="games">
+        <div class="container">
+            <h2 class="section-title" data-aos>Мини-игры</h2>
+            <div class="games-grid">
+                <div class="game-card" data-aos>
+                    <h3>🎰 Рулетка</h3>
+                    <p>Ставки на числа и цвета</p>
+                </div>
+                <div class="game-card" data-aos>
+                    <h3>🃏 Джокер</h3>
+                    <p>Открывай карты, избегай скелетов</p>
+                </div>
+                <div class="game-card" data-aos>
+                    <h3>💣 Мины</h3>
+                    <p>Сапёр с множителями</p>
+                </div>
+                <div class="game-card" data-aos>
+                    <h3>⚔️ Дуэли</h3>
+                    <p>Камень-ножницы-бумага</p>
+                </div>
+                <div class="game-card" data-aos>
+                    <h3>🪙 Coinflip</h3>
+                    <p>Орёл или решка</p>
+                </div>
+                <div class="game-card" data-aos>
+                    <h3>🎰 Фортуна</h3>
+                    <p>Слоты с множителями</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP и кейсы -->
+    <section class="section section-alt" id="vip">
+        <div class="container">
+            <h2 class="section-title" data-aos>VIP и кейсы</h2>
+            <div class="vip-cases">
+                <div class="vip-block" data-aos>
+                    <h3>👑 VIP-статус</h3>
+                    <ul>
+                        <li>Увеличенный бонус</li>
+                        <li>Особые кейсы</li>
+                        <li>Приоритет в чате</li>
+                    </ul>
+                    <a href="https://t.me/KaspiRedCreditBot" class="btn btn-secondary">Купить VIP</a>
+                </div>
+                <div class="vip-block" data-aos>
+                    <h3>📦 Кейсы</h3>
+                    <ul>
+                        <li>Деревянный — 10 млн</li>
+                        <li>Железный — 100 млн</li>
+                        <li>Золотой — 1 млрд</li>
+                        <li>Алмазный — 10 млрд</li>
+                        <li>Легендарный — 100 млрд</li>
+                        <li>Мифический — 1 трлн</li>
+                        <li>Космический — 100 трлн</li>
+                    </ul>
+                    <a href="https://t.me/KaspiRedCreditBot" class="btn btn-secondary">Открыть кейс</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Правила -->
+    <section class="section" id="rules">
+        <div class="container">
+            <h2 class="section-title" data-aos>Правила и дисклеймер</h2>
+            <div class="rules-box" data-aos>
+                <p>NurGame — развлекательный бот. Вся валюта виртуальная и не обменивается на реальные деньги.</p>
+                <p>Бот не является казино и не предоставляет услуги азартных игр.</p>
+                <p>Возрастное ограничение: 18+.</p>
+                <p>Администрация оставляет за собой право изменять правила и блокировать нарушителей.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Правовая информация -->
+    <section class="section section-alt" id="legal">
+        <div class="container">
+            <h2 class="section-title" data-aos>Правовая информация</h2>
+            <div class="rules-box" data-aos>
+                <p>NurGame — развлекательный проект. Все операции с виртуальной валютой не являются азартными играми и не регулируются Законом РК «Об игорном бизнесе», так как не предполагают реальных денежных ставок и выигрышей.</p>
+                <p>Проект не связан с АО «Kaspi Bank» и ТОО «Kaspi Магазин». Название является фан-названием.</p>
+                <p>Согласно законодательству Республики Казахстан:</p>
+                <ul>
+                    <li>Закон РК «Об игорном бизнесе» (ст. 1)</li>
+                    <li>Гражданский кодекс РК (ст. 389)</li>
+                    <li>Закон РК «О товарных знаках» (ст. 4, 19)</li>
+                    <li>Закон РК «О персональных данных и их защите» (ст. 7)</li>
+                </ul>
+                <p>Подробнее можно ознакомиться на сайте online.zakon.kz</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos>Контакты</h2>
+            <div class="contact-buttons">
+                <a href="https://t.me/KaspiRedCreditBot" class="btn btn-primary" data-aos>
+                    <i class="fab fa-telegram-plane"></i> Бот
+                </a>
+                <a href="https://t.me/kaspired_game" class="btn btn-secondary" data-aos>
+                    <i class="fas fa-bullhorn"></i> Канал
+                </a>
+                <a href="https://t.me/kaspired_chat" class="btn btn-secondary" data-aos>
+                    <i class="fas fa-users"></i> Чат
+                </a>
+                <a href="https://t.me/se7ze" class="btn btn-secondary" data-aos>
+                    <i class="fas fa-user"></i> Владелец
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 NurGame. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
