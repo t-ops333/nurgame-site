@@ -7,294 +7,698 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #15151e;
+            --bg-hover: #1e1e2a;
+            --text: #f0f0f0;
+            --text-muted: #aaa;
+            --accent: #a855f7;
+            --accent2: #ff2a5f;
+            --gradient: linear-gradient(135deg, #a855f7, #ff2a5f);
+            --border: rgba(255,255,255,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10,10,15,0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-desktop a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-desktop a:hover {
+            color: var(--accent);
+        }
+
+        .burger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        /* Мобильное меню */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-dark);
+            flex-direction: column;
+            padding: 20px;
+            gap: 15px;
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+        }
+
+        .mobile-nav a {
+            font-size: 18px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            background: url('bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10,10,15,0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .hero-logo {
+            width: 130px;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(168,85,247,0.6));
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ddd;
+            max-width: 500px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 0 20px rgba(168,85,247,0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(168,85,247,0.8);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Секции */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-alt {
+            background-color: #111118;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #fff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Табы */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Карточки */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .card p,
+        .card li {
+            color: var(--text-muted);
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Аккордеон */
+        .accordion-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .accordion-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .accordion-body {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-body p {
+            padding-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .accordion-item.active .accordion-body {
+            max-height: 300px;
+        }
+
+        /* Иерархия */
+        .hierarchy-list {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .hierarchy-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .hierarchy-item .rank {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .hierarchy-item .desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        /* Контакты */
+        .contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        footer {
+            background: #111118;
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Анимации */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(168,85,247,0.5); }
+            to { text-shadow: 0 0 30px rgba(168,85,247,1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+            .burger {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .hierarchy-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+            .hierarchy-item .desc {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <!-- Шапка -->
-    <header class="header">
+    <header>
         <div class="container header-inner">
-            <a href="#hero" class="logo">
-                <img src="logo.png" alt="NurGame" class="logo-img">
-            </a>
-            <nav class="nav" id="nav">
-                <a href="#about">О боте</a>
+            <a href="#" class="logo"><img src="logo.png" alt="NurGame"></a>
+            <nav class="nav-desktop">
+                <a href="#games">Игры</a>
                 <a href="#commands">Команды</a>
-                <a href="#vip">VIP и кейсы</a>
-                <a href="#admin-commands">Админ-команды</a>
+                <a href="#admins">Админы</a>
                 <a href="#hierarchy">Иерархия</a>
-                <a href="#join">Вступить</a>
-                <a href="#rules">Правила</a>
-                <a href="#legal">Правовая информация</a>
+                <a href="#faq">FAQ</a>
                 <a href="#contact">Контакты</a>
             </nav>
-            <div class="socials-top">
-                <a href="https://t.me/KaspiRedCreditBot" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-                <a href="https://t.me/kaspired_game" target="_blank"><i class="fas fa-bullhorn"></i></a>
-                <a href="https://t.me/kaspired_chat" target="_blank"><i class="fas fa-users"></i></a>
-                <a href="https://t.me/se7ze" target="_blank"><i class="fas fa-user"></i></a>
-            </div>
-            <button class="burger" id="burger" aria-label="Меню">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="burger" id="burger"><i class="fas fa-bars"></i></button>
+        </div>
+        <!-- Мобильное меню -->
+        <div class="mobile-nav" id="mobileNav">
+            <a href="#games">Игры</a>
+            <a href="#commands">Команды</a>
+            <a href="#admins">Админы</a>
+            <a href="#hierarchy">Иерархия</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Контакты</a>
         </div>
     </header>
 
     <!-- Главный экран -->
-    <section class="hero" id="hero">
-        <div class="hero-bg"></div>
-        <div class="container hero-content">
+    <section class="hero">
+        <div class="hero-content">
             <img src="logo.png" alt="NurGame" class="hero-logo">
-            <h1 class="hero-title">Nur<span class="accent">Game</span></h1>
-            <p class="hero-subtitle">Игровой бот с виртуальной валютой, майнингом и кланами</p>
-            <a href="#commands" class="btn btn-primary">
-                <i class="fas fa-list"></i> Смотреть команды
-            </a>
-            <div class="scroll-down">
-                <i class="fas fa-chevron-down"></i>
+            <h1>Nur<span style="color:#a855f7;">Game</span></h1>
+            <p>Игровой бот с виртуальной валютой, кланами, кейсами и майнингом</p>
+            <div class="btn-group">
+                <a href="https://t.me/KaspiRedCreditBot" class="btn btn-primary"><i class="fab fa-telegram-plane"></i> Играть</a>
+                <a href="#commands" class="btn btn-outline"><i class="fas fa-list"></i> Команды</a>
             </div>
         </div>
     </section>
 
-    <!-- О боте -->
-    <section class="section" id="about">
+    <!-- Игры -->
+    <section id="games" class="section">
         <div class="container">
-            <h2 class="section-title" data-aos>О боте</h2>
-            <p class="section-text" data-aos>
-                NurGame — это развлекательная платформа внутри Telegram. Играйте в рулетку, открывайте кейсы, майните крипту и соревнуйтесь с друзьями. Вся валюта виртуальная и не имеет реальной ценности.
-            </p>
-            <div class="features-grid">
-                <div class="feature-card" data-aos>
-                    <i class="fas fa-gamepad"></i>
-                    <h3>Много игр</h3>
-                    <p>Рулетка, джокер, мины, дуэли, coinflip, фортуна</p>
+            <h2 class="section-title">Мини-игры</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎰 Рулетка</h3>
+                    <p>Ставки на числа, цвета, диапазоны. Участвуй с друзьями в групповых раундах.</p>
+                    <p><b>Как играть:</b> напиши <span style="color:#a855f7;">[сумма] [объект]</span> (например, <span style="color:#a855f7;">100 красное</span>), затем <span style="color:#a855f7;">го</span> для запуска.</p>
                 </div>
-                <div class="feature-card" data-aos>
-                    <i class="fas fa-coins"></i>
-                    <h3>Экономика</h3>
-                    <p>Виртуальная валюта, кейсы, VIP, депозиты</p>
+                <div class="card">
+                    <h3>🃏 Джокер</h3>
+                    <p>Открывай карты по одной, избегая скелета. Можно забрать выигрыш на любом этапе.</p>
+                    <p><b>Команда:</b> <span style="color:#a855f7;">джокер [ставка]</span></p>
                 </div>
-                <div class="feature-card" data-aos>
-                    <i class="fas fa-users"></i>
-                    <h3>Кланы</h3>
-                    <p>Создавайте кланы, пополняйте казну, соревнуйтесь</p>
+                <div class="card">
+                    <h3>💣 Мины</h3>
+                    <p>Поле 5x5 с 7 бомбами. Открывай клетки, увеличивай множитель. Осторожно!</p>
+                    <p><b>Команда:</b> <span style="color:#a855f7;">мины [ставка]</span></p>
                 </div>
-                <div class="feature-card" data-aos>
-                    <i class="fas fa-microchip"></i>
-                    <h3>Майнинг</h3>
-                    <p>Покупайте видеокарты и добывайте BTC (игровой)</p>
+                <div class="card">
+                    <h3>⚔️ Дуэли</h3>
+                    <p>Камень-ножницы-бумага против другого игрока. Вызывай через ответ на сообщение.</p>
+                    <p><b>Команда:</b> <span style="color:#a855f7;">дуэль [ставка]</span> (ответом на сообщение соперника)</p>
+                </div>
+                <div class="card">
+                    <h3>🪙 Coinflip</h3>
+                    <p>Орёл или решка. Удвой свою ставку!</p>
+                    <p><b>Команда:</b> <span style="color:#a855f7;">coinflip [ставка]</span></p>
+                </div>
+                <div class="card">
+                    <h3>🎰 Фортуна</h3>
+                    <p>Слоты с множителями. Собери три одинаковых символа.</p>
+                    <p><b>Команда:</b> <span style="color:#a855f7;">фортуна [ставка]</span></p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Команды -->
-    <section class="section section-alt" id="commands">
+    <section id="commands" class="section section-alt">
         <div class="container">
-            <h2 class="section-title" data-aos>Основные команды</h2>
-            <div class="commands-list">
-                <div class="command-item" data-aos>
-                    <span class="command">/start</span>
-                    <span class="description">Начать работу с ботом</span>
-                </div>
-                <div class="command-item" data-aos>
-                    <span class="command">баланс</span>
-                    <span class="description">Посмотреть свой профиль и баланс</span>
-                </div>
-                <div class="command-item" data-aos>
-                    <span class="command">кейс</span>
-                    <span class="description">Список кейсов и покупка</span>
-                </div>
-                <div class="command-item" data-aos>
-                    <span class="command">майнинг</span>
-                    <span class="description">Управление майнинг фермой</span>
-                </div>
-                <div class="command-item" data-aos>
-                    <span class="command">clan</span>
-                    <span class="description">Кланы: создание, вступление, казна</span>
-                </div>
-                <div class="command-item" data-aos>
-                    <span class="command">джокер [ставка]</span>
-                    <span class="description">Игра Джокер</span>
+            <h2 class="section-title">Основные команды</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="economy">Экономика</button>
+                <button class="tab-btn" data-tab="mining">Майнинг</button>
+                <button class="tab-btn" data-tab="clans">Кланы</button>
+                <button class="tab-btn" data-tab="misc">Прочее</button>
+            </div>
+
+            <div id="economy" class="tab-content active">
+                <div class="cards-grid">
+                    <div class="card"><h3>💰 Баланс</h3><p><span style="color:#a855f7;">баланс</span> — показывает твой баланс и статистику.</p></div>
+                    <div class="card"><h3>🎁 Бонус</h3><p><span style="color:#a855f7;">бонус</span> — ежедневный бонус (раз в 8 часов).</p></div>
+                    <div class="card"><h3>💸 Перевод</h3><p><span style="color:#a855f7;">п [сумма] @user</span> — перевести деньги.</p></div>
+                    <div class="card"><h3>🏦 Депозит</h3><p><span style="color:#a855f7;">депозит [сумма]</span> — открыть вклад. <span style="color:#a855f7;">снять депозит</span> — забрать.</p></div>
+                    <div class="card"><h3>👛 Сейф</h3><p><span style="color:#a855f7;">сейф</span> — твои кейсы и BTC.</p></div>
+                    <div class="card"><h3>👥 Рефералы</h3><p><span style="color:#a855f7;">/referral</span> — приглашай друзей, получай бонусы.</p></div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- VIP и кейсы -->
-    <section class="section" id="vip">
-        <div class="container">
-            <h2 class="section-title" data-aos>VIP и кейсы</h2>
-            <div class="vip-cases">
-                <div class="vip-block" data-aos>
-                    <h3>👑 VIP-статус</h3>
-                    <ul>
-                        <li>Увеличенный бонус</li>
-                        <li>Особые кейсы</li>
-                        <li>Приоритет в чате</li>
-                    </ul>
-                    <a href="https://t.me/KaspiRedCreditBot" class="btn btn-secondary">Купить VIP</a>
+            <div id="mining" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card"><h3>⛏ Майнинг</h3><p><span style="color:#a855f7;">майнинг</span> — посмотреть ферму.</p></div>
+                    <div class="card"><h3>🛒 Магазин</h3><p><span style="color:#a855f7;">майнинг магазин</span> — список видеокарт и цен.</p></div>
+                    <div class="card"><h3>🖥 Купить карту</h3><p><span style="color:#a855f7;">майнинг купить [тип] [кол-во]</span> — лимит 10 карт.</p></div>
+                    <div class="card"><h3>📤 Забрать BTC</h3><p><span style="color:#a855f7;">забрать</span> — получить накопленный BTC.</p></div>
+                    <div class="card"><h3>💱 Продать BTC</h3><p><span style="color:#a855f7;">продать [кол-во]</span> или <span style="color:#a855f7;">продать всё</span>.</p></div>
                 </div>
-                <div class="vip-block" data-aos>
-                    <h3>📦 Кейсы</h3>
-                    <ul>
-                        <li>Деревянный — 10 млн</li>
-                        <li>Железный — 100 млн</li>
-                        <li>Золотой — 1 млрд</li>
-                        <li>Алмазный — 10 млрд</li>
-                        <li>Легендарный — 100 млрд</li>
-                        <li>Мифический — 1 трлн</li>
-                        <li>Космический — 100 трлн</li>
-                    </ul>
-                    <a href="https://t.me/KaspiRedCreditBot" class="btn btn-secondary">Открыть кейс</a>
+            </div>
+
+            <div id="clans" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card"><h3>🏰 Создать клан</h3><p><span style="color:#a855f7;">clan создать [имя]</span> — 100 млн.</p></div>
+                    <div class="card"><h3>🚪 Вступить</h3><p><span style="color:#a855f7;">clan вступить [имя/id]</span></p></div>
+                    <div class="card"><h3>ℹ️ Инфо</h3><p><span style="color:#a855f7;">clan инфо</span></p></div>
+                    <div class="card"><h3>💰 Казна</h3><p><span style="color:#a855f7;">clan казна [сумма]</span> — пополнить.</p></div>
+                    <div class="card"><h3>💸 Снять</h3><p><span style="color:#a855f7;">clan снять [сумма]</span> — только владелец.</p></div>
+                    <div class="card"><h3>🏆 Топ кланов</h3><p><span style="color:#a855f7;">clan топ</span></p></div>
+                </div>
+            </div>
+
+            <div id="misc" class="tab-content">
+                <div class="cards-grid">
+                    <div class="card"><h3>👤 Профиль</h3><p><span style="color:#a855f7;">б</span> или <span style="color:#a855f7;">баланс</span></p></div>
+                    <div class="card"><h3>🏷️ Смена ника</h3><p><span style="color:#a855f7;">/name [новое имя]</span></p></div>
+                    <div class="card"><h3>👑 VIP</h3><p><span style="color:#a855f7;">/vip</span> — инфо о VIP. <span style="color:#a855f7;">vip_buy [часы]</span> — покупка.</p></div>
+                    <div class="card"><h3>📋 Ежедневное</h3><p><span style="color:#a855f7;">/daily</span> — задание с наградой.</p></div>
+                    <div class="card"><h3>🎟 Промокод</h3><p><span style="color:#a855f7;">/promo [код]</span></p></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Админ-команды -->
-    <section class="section section-alt" id="admin-commands">
+    <section id="admins" class="section">
         <div class="container">
-            <h2 class="section-title" data-aos>Админ-команды</h2>
-            <div class="admin-grid">
-                <div class="admin-block" data-aos>
-                    <h3>🛡 Модератор</h3>
+            <h2 class="section-title">Админ-команды</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>⭐ Модератор</h3>
                     <ul>
-                        <li><span class="command">/info @user</span> — инфо о пользователе</li>
-                        <li><span class="command">/stats</span> — статистика бота</li>
-                        <li><span class="command">/list_admins</span> — список админов</li>
+                        <li><span style="color:#a855f7;">/info @user</span> — инфо о пользователе</li>
+                        <li><span style="color:#a855f7;">/stats</span> — статистика</li>
+                        <li><span style="color:#a855f7;">/list_admins</span> — список админов</li>
                     </ul>
                 </div>
-                <div class="admin-block" data-aos>
+                <div class="card">
                     <h3>🔰 Админ</h3>
                     <ul>
-                        <li><span class="command">выдать @user сумма</span> — начислить</li>
-                        <li><span class="command">/take @user сумма</span> — списать</li>
-                        <li><span class="command">/freeze @user</span> — заморозить (обычных)</li>
-                        <li><span class="command">/unfreeze @user</span> — разморозить</li>
-                        <li><span class="command">/addpromo</span>, <span class="command">/delpromo</span></li>
+                        <li>Всё, что у модератора</li>
+                        <li><span style="color:#a855f7;">выдать @user сумма</span></li>
+                        <li><span style="color:#a855f7;">/take @user сумма</span></li>
+                        <li><span style="color:#a855f7;">/freeze @user</span> — заморозка</li>
+                        <li><span style="color:#a855f7;">/unfreeze @user</span></li>
+                        <li><span style="color:#a855f7;">/addpromo</span>, <span style="color:#a855f7;">/delpromo</span></li>
                     </ul>
                 </div>
-                <div class="admin-block" data-aos>
+                <div class="card">
                     <h3>👑 Главный админ</h3>
                     <ul>
-                        <li><span class="command">/add_admin @user ранг</span></li>
-                        <li><span class="command">/remove_admin @user</span></li>
-                        <li><span class="command">/broadcast текст</span></li>
-                        <li><span class="command">/snos @user</span> — снять с должности</li>
-                        <li><span class="command">/setbonus</span>, <span class="command">/setcooldown</span></li>
+                        <li>Всё, что у админа</li>
+                        <li><span style="color:#a855f7;">/add_admin @user ранг</span></li>
+                        <li><span style="color:#a855f7;">/remove_admin @user</span></li>
+                        <li><span style="color:#a855f7;">/broadcast текст</span></li>
+                        <li><span style="color:#a855f7;">/snos @user</span></li>
+                        <li><span style="color:#a855f7;">/setbonus</span>, <span style="color:#a855f7;">/setcooldown</span></li>
                     </ul>
                 </div>
-                <div class="admin-block" data-aos>
+                <div class="card">
                     <h3>💎 Владелец</h3>
                     <ul>
-                        <li><span class="command">/sql_execute</span></li>
-                        <li><span class="command">/backup</span></li>
-                        <li><span class="command">/deleteuser @user</span></li>
-                        <li><span class="command">/givepower @user cmd</span></li>
-                        <li>И все секретные команды</li>
+                        <li>Полный доступ ко всем командам</li>
+                        <li><span style="color:#a855f7;">/sql_execute</span></li>
+                        <li><span style="color:#a855f7;">/backup</span></li>
+                        <li><span style="color:#a855f7;">/deleteuser @user</span></li>
+                        <li><span style="color:#a855f7;">/givepower @user cmd</span></li>
+                        <li>и другие секретные команды</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Иерархия админов -->
-    <section class="section" id="hierarchy">
+    <!-- Иерархия -->
+    <section id="hierarchy" class="section section-alt">
         <div class="container">
-            <h2 class="section-title" data-aos>Иерархия админов</h2>
+            <h2 class="section-title">Иерархия админов</h2>
             <div class="hierarchy-list">
-                <div class="hierarchy-item" data-aos>
-                    <span class="rank">💎 Владелец</span>
-                    <span class="rank-desc">Полный доступ ко всем командам и настройкам</span>
-                </div>
-                <div class="hierarchy-item" data-aos>
-                    <span class="rank">👑 Главный админ</span>
-                    <span class="rank-desc">Управление админами, рассылка, настройки бонусов</span>
-                </div>
-                <div class="hierarchy-item" data-aos>
-                    <span class="rank">🔰 Админ</span>
-                    <span class="rank-desc">Выдача/списание баланса, заморозка обычных игроков</span>
-                </div>
-                <div class="hierarchy-item" data-aos>
-                    <span class="rank">👑 Special Admin</span>
-                    <span class="rank-desc">Назначение модераторов, контроль за админами</span>
-                </div>
-                <div class="hierarchy-item" data-aos>
-                    <span class="rank">⭐ Модератор</span>
-                    <span class="rank-desc">Просмотр инфо, статистики, списка админов</span>
-                </div>
+                <div class="hierarchy-item"><span class="rank">💎 Владелец</span><span class="desc">Полный контроль над ботом</span></div>
+                <div class="hierarchy-item"><span class="rank">👑 Главный админ</span><span class="desc">Управление админами, настройками</span></div>
+                <div class="hierarchy-item"><span class="rank">🔰 Админ</span><span class="desc">Выдача/снятие баланса, заморозки</span></div>
+                <div class="hierarchy-item"><span class="rank">👑 Special Admin</span><span class="desc">Назначение модераторов, контроль</span></div>
+                <div class="hierarchy-item"><span class="rank">⭐ Модератор</span><span class="desc">Только просмотр информации</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Как вступить в команду -->
-    <section class="section section-alt" id="join">
+    <!-- FAQ -->
+    <section id="faq" class="section">
         <div class="container">
-            <h2 class="section-title" data-aos>Как вступить в команду?</h2>
-            <div class="join-box" data-aos>
-                <p>Хочешь стать частью команды NurGame? Пиши владельцу в личные сообщения.</p>
-                <p>Расскажи о себе, своём опыте и почему хочешь помогать проекту.</p>
-                <a href="https://t.me/se7ze" class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i> Написать владельцу
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Правила -->
-    <section class="section" id="rules">
-        <div class="container">
-            <h2 class="section-title" data-aos>Правила и дисклеймер</h2>
-            <div class="rules-box" data-aos>
-                <p>NurGame — развлекательный бот. Вся валюта виртуальная и не обменивается на реальные деньги.</p>
-                <p>Бот не является казино и не предоставляет услуги азартных игр.</p>
-                <p>Возрастное ограничение: 18+.</p>
-                <p>Администрация оставляет за собой право изменять правила и блокировать нарушителей.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Правовая информация -->
-    <section class="section section-alt" id="legal">
-        <div class="container">
-            <h2 class="section-title" data-aos>Правовая информация</h2>
-            <div class="rules-box" data-aos>
-                <p>NurGame — игровая платформа внутри Telegram. Вся валюта в боте является виртуальной и используется исключительно для развлечения. Она не является средством платежа и не обменивается на реальные деньги.</p>
-                <p>Бот не предоставляет услуги казино и не проводит азартные игры, так как все ставки и выигрыши осуществляются в игровых баллах без участия реальных денег.</p>
-                <p>Приобретение виртуальной валюты — это покупка внутриигровых ценностей, необходимых для доступа к расширенным функциям. Это не нарушает законодательство, поскольку не является организацией игорного бизнеса.</p>
-                <p>Все действия пользователей происходят в виртуальной среде и не влекут финансовых обязательств.</p>
+            <h2 class="section-title">Частые вопросы</h2>
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <div class="accordion-header">Как начать играть? <i class="fas fa-chevron-down"></i></div>
+                    <div class="accordion-body"><p>Нажми /start в боте, получи стартовый баланс и выбери игру через меню или команды.</p></div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">Это казино? <i class="fas fa-chevron-down"></i></div>
+                    <div class="accordion-body"><p>Нет, это развлекательный бот. Валюта виртуальная и не обменивается на реальные деньги.</p></div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">Как вступить в команду? <i class="fas fa-chevron-down"></i></div>
+                    <div class="accordion-body"><p>Напиши владельцу в Telegram: @se7ze</p></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Контакты -->
-    <section class="section" id="contact">
+    <section id="contact" class="section section-alt">
         <div class="container">
-            <h2 class="section-title" data-aos>Контакты</h2>
+            <h2 class="section-title">Контакты</h2>
             <div class="contact-buttons">
-                <a href="https://t.me/KaspiRedCreditBot" class="btn btn-primary" data-aos>
-                    <i class="fab fa-telegram-plane"></i> Бот
-                </a>
-                <a href="https://t.me/kaspired_game" class="btn btn-secondary" data-aos>
-                    <i class="fas fa-bullhorn"></i> Канал
-                </a>
-                <a href="https://t.me/kaspired_chat" class="btn btn-secondary" data-aos>
-                    <i class="fas fa-users"></i> Чат
-                </a>
-                <a href="https://t.me/se7ze" class="btn btn-secondary" data-aos>
-                    <i class="fas fa-user"></i> Владелец
-                </a>
+                <a href="https://t.me/KaspiRedCreditBot" class="btn btn-primary"><i class="fab fa-telegram-plane"></i> Бот</a>
+                <a href="https://t.me/kaspired_game" class="btn btn-outline"><i class="fas fa-bullhorn"></i> Канал</a>
+                <a href="https://t.me/kaspired_chat" class="btn btn-outline"><i class="fas fa-users"></i> Чат</a>
+                <a href="https://t.me/se7ze" class="btn btn-outline"><i class="fas fa-user"></i> Владелец</a>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer>
         <div class="container">
             <p>&copy; 2026 NurGame. Все права защищены.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Бургер-меню
+        const burger = document.getElementById('burger');
+        const mobileNav = document.getElementById('mobileNav');
+        burger.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        // Закрывать мобильное меню при клике на ссылку
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Табы
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.dataset.tab;
+                // Убираем active у всех кнопок и контента
+                tabBtns.forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                // Активируем нужный контент
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Аккордеон
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(item => {
+            item.querySelector('.accordion-header').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
