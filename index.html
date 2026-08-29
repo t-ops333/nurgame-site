@@ -105,12 +105,18 @@
             gap: 15px;
             border-bottom: 1px solid var(--border);
             z-index: 999;
+            animation: fadeIn 0.3s ease;
         }
 
         .mobile-nav a {
             font-size: 18px;
             padding: 10px 0;
             border-bottom: 1px solid var(--border);
+            transition: color 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
         }
 
         .mobile-nav.active {
@@ -237,6 +243,15 @@
             border-radius: 12px;
             margin-bottom: 10px;
             overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .accordion-item:hover {
+            border-color: var(--accent);
+        }
+
+        .accordion-item.active {
+            box-shadow: 0 0 15px rgba(168,85,247,0.2);
         }
 
         .accordion-header {
@@ -270,6 +285,10 @@
             background: #111118;
         }
 
+        .accordion-item.active .accordion-body {
+            max-height: 1200px; /* достаточно для всех команд */
+        }
+
         .accordion-body-inner {
             padding: 15px 20px;
         }
@@ -283,6 +302,12 @@
             border-bottom: 1px solid var(--border);
             color: var(--text-muted);
             font-size: 0.95rem;
+            transition: padding-left 0.2s;
+        }
+
+        .command-list li:hover {
+            padding-left: 8px;
+            color: var(--text);
         }
 
         .command-list li:last-child {
@@ -306,12 +331,13 @@
             border-radius: 18px;
             padding: 25px;
             border: 1px solid var(--border);
-            transition: transform 0.3s, border-color 0.3s;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(168,85,247,0.1);
         }
 
         .card h3 {
@@ -322,6 +348,17 @@
 
         .card p {
             color: var(--text-muted);
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
         /* Иерархия */
@@ -341,6 +378,11 @@
             padding: 15px 20px;
             border-radius: 12px;
             border-left: 3px solid var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .hierarchy-item:hover {
+            transform: translateX(5px);
         }
 
         .hierarchy-item .rank {
@@ -369,6 +411,7 @@
             color: var(--text-muted);
         }
 
+        /* Анимации */
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -380,6 +423,12 @@
             to { text-shadow: 0 0 30px rgba(168,85,247,1); }
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Мобильная адаптация */
         @media (max-width: 768px) {
             .nav-desktop { display: none; }
             .burger { display: block; }
@@ -387,6 +436,7 @@
             .section-title { font-size: 2rem; }
             .hierarchy-item { flex-direction: column; text-align: center; gap: 5px; }
             .hierarchy-item .desc { text-align: center; }
+            .command-list li { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -709,6 +759,13 @@
         document.querySelectorAll('.accordion-item').forEach(item => {
             const header = item.querySelector('.accordion-header');
             header.addEventListener('click', () => {
+                // Закрыть все остальные
+                document.querySelectorAll('.accordion-item').forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove('active');
+                    }
+                });
+                // Переключить текущий
                 item.classList.toggle('active');
             });
         });
