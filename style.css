@@ -105,7 +105,7 @@ body {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url('bg.webp') no-repeat center center;
+    background: url('bg.jpg') no-repeat center center;
     background-size: cover;
     animation: slowZoom 20s infinite alternate;
 }
